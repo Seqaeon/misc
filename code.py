@@ -879,11 +879,7 @@ class ChessTransformer(nn.Module):
 
 
     def forward(self, batch, targets=None, attention_mask=None):
-    # Convert boolean mask to float mask for attention
-        if attention_mask is not None:
-            attention_mask = attention_mask.float()
-            attention_mask = attention_mask.masked_fill(attention_mask == 0, float('-inf'))
-            attention_mask = attention_mask.masked_fill(attention_mask == 1, 0.0)
+
         
         winner_attn = self.loser_encoder(
             perspective_ids=batch['winner_perspective_token'],
